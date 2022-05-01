@@ -38,7 +38,7 @@ void printEspiral(int dim, int mat[][dim]) {
         }
 
         cInf++;
-    } while (lInf <= lSup);
+    } while (lInf < lSup);
 }
 
 int main(int argc, char **argv) {
