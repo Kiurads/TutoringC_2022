@@ -13,16 +13,10 @@ int main(int argc, char **argv)
 
         switch (input) {
             case 1:
-                aux = criaPessoa();
-
-                if (aux == NULL)
-                {
-                    printf("Erro ao criar uma nova pessoa\n");
-                    return 1;
-                }
+                printf("ID da nova pessoa: ");
+                scanf(" %d", &id);
                 
-                aux->prox = lista;
-                lista = aux;
+                lista = adicionaPessoa(id, lista);
 
                 break;
 
@@ -38,6 +32,7 @@ int main(int argc, char **argv)
                 
                 break;
         }
+        
     } while (input != 0);
 
     while (lista != NULL)

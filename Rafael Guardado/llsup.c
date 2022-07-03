@@ -13,7 +13,7 @@ void mostraMenu()
     printf("Escolha: ");
 }
 
-pPessoa criaPessoa() 
+pPessoa criaPessoa(int id) 
 {
     pPessoa novo;
 
@@ -25,13 +25,68 @@ pPessoa criaPessoa()
     printf("Nome: ");
     scanf(" %[^\n]", novo->nome);
 
-    printf("ID: ");
-    scanf(" %d", &novo->id);
-
     printf("Cidade: ");
     scanf(" %[^\n]", novo->cidade);
 
+    novo->id = id;
+
     return novo;
+}
+
+pPessoa adicionaPessoa(int id, pPessoa lista)
+{
+    pPessoa proximo, anterior, novo;
+
+    proximo = lista;
+    anterior = NULL;
+    novo = NULL;
+
+    while (proximo != NULL && proximo->id < id)
+    {
+        anterior = proximo;
+        proximo = proximo->prox;
+    }
+
+    if (anterior != NULL)
+    {
+        if (anterior->id < id)
+        {
+            if (proximo == NULL || proximo->id > id)
+            {
+                novo = criaPessoa(id);
+
+                if (novo == NULL)
+                {
+                    printf("Erro ao criar nova pessoa\n");
+                    return lista;
+                }
+
+                novo->prox = proximo;
+                anterior->prox = novo;   
+            }
+        }
+    }
+    else
+    {
+        if (proximo == NULL || proximo->id > id)
+        {
+            novo = criaPessoa(id);
+
+            if (novo == NULL)
+            {
+                printf("Erro ao criar nova pessoa\n");
+                return lista;
+            }
+
+            novo->prox = lista;
+            lista = novo;
+        }
+    }
+
+    if (novo == NULL)
+        printf("ID repetido\n");
+    
+    return lista;    
 }
 
 void mostraPessoas(pPessoa lista) 

@@ -13,6 +13,7 @@ struct Pessoa
 };
 
 void mostraMenu();
-pPessoa criaPessoa();
+pPessoa criaPessoa(int id);
+pPessoa adicionaPessoa(int id, pPessoa lista);
 void mostraPessoas(pPessoa lista);
 pPessoa removePessoa(int id, pPessoa lista);
